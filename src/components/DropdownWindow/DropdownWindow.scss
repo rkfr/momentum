@@ -1,0 +1,92 @@
+@import '../../styles/utils.scss';
+
+.dropdown-window {
+  position: relative;
+  display: inline-block;
+  padding: 21px 21px 18px;
+
+  color: $font-color-primary;
+  background-color: $background-color-primary;
+  border-radius: $border-radius-primary;
+
+  &::after {
+    height: 0;
+    width: 0;
+    position: absolute;
+    display: block;
+    opacity: 1;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    overflow: visible;
+    content: '';
+  }
+}
+
+.top-left {
+  &::after {
+    top: -7px;
+    border-bottom: 7px solid $background-color-primary;
+  }
+}
+
+.top-right {
+  &::after {
+    top: -7px;
+    right: 33px;
+    border-bottom: 7px solid $background-color-primary;
+  }
+}
+
+.bottom-left {
+  &::after {
+    bottom: -7px;
+    border-top: 7px solid $background-color-primary;
+  }
+}
+
+.bottom-right {
+  &::after {
+    bottom: -7px;
+    right: 33px;
+    border-top: 7px solid $background-color-primary;
+  }
+}
+
+.animation-fade-in {
+  animation: fadeIn ease-in 250ms;
+}
+
+.animation-fade-out {
+  animation: fadeOut ease-in-out 250ms;
+}
+
+@keyframes fadeIn {
+
+  0% {
+    opacity:0;
+  }
+
+  15% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity:1;
+    transform:  translate(0px, 0px);
+  }
+}
+
+@keyframes fadeOut {
+
+  0% {
+    opacity: 1;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
