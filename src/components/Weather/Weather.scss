@@ -1,0 +1,73 @@
+@import '../../styles/utils.scss';
+
+.weather {
+  display: inline-block;
+  position: relative;
+
+  &__overview {
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+  }
+
+  &__location-name {
+    @include fontSize(18px);
+  }
+
+  &__weather-description {
+    @include fontSize(15px);
+
+    opacity: .7;
+    margin-bottom: 1rem;
+  }
+
+  &__degree {
+    @include fontSize(60px);
+    
+    font-weight: 600;
+    line-height: 1;
+
+    margin-bottom: 1.3rem;
+
+    &::after {
+      @extend %degree-symb;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+  }
+}
+
+.metric {
+  display: inline-block;
+  padding: 11px 10px 10px;
+
+  text-align: right;
+  color: $font-color-primary;
+
+  cursor: pointer;
+
+  &__number {
+    @include fontSize(25px);
+    display: block;
+
+    &::after {
+      @extend %degree-symb;
+    }
+  }
+
+  &__label {
+    @include fontSize(14px);
+
+    display: block;
+  }
+
+  
+}
+
+.weather__dropdown.dropdown-window {
+  position: absolute;
+
+  top: 100%;
+  right: 0;
+}

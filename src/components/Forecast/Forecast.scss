@@ -1,0 +1,46 @@
+@import '../../styles/utils.scss';
+
+.forecast {
+  display: flex;
+  width: 100%;
+  padding-top: .5rem;
+
+  &__item {
+    padding: 5px 24px;
+    border-radius: 3px;
+
+    cursor: pointer;
+
+    &--selected {
+      background-color: $background-color-secondary;
+    }
+
+    &:not(:first-child) {
+      margin-left: .6rem;
+    }
+
+    &:hover {
+      background-color: $background-color-secondary;
+    }
+  }
+
+  &__day {
+    @include fontSize(10px);
+
+    font-weight: 500;
+    opacity: .6;
+    text-transform: uppercase;
+  }
+
+  &__temp {
+    @include fontSize(12px);
+
+    &::after {
+      @extend %degree-symb;
+    }  
+  }
+
+  &__temp-max {
+    margin-left: 5px;
+  }
+}
