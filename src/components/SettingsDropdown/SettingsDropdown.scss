@@ -1,0 +1,62 @@
+@import '../../styles/utils.scss';
+
+.settings-dropdown {
+  display: inline-flex;
+
+  &__dropdown {
+    order: -1;
+    
+    margin: 5px;
+    padding: 5px 0;
+
+    box-shadow: 0 1px 3px transparent;
+    border-radius: $border-radius-primary;
+    background-color: rgb(51, 51, 51);
+  }
+}
+
+.dropdown-button {
+  position: relative;
+  display: inline-block;
+
+  width: 25px;
+  height: 25px;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover &__label {
+    opacity: 1;
+  }
+
+  &:hover {
+    background-color: $bg-color-drop-hover;
+  }
+
+  &__label {
+    @extend %block-v-h-100;
+    
+    position: absolute;
+    top: -3px;
+    left: 4px;
+
+    color: $text-color-primary;
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+    vertical-align: baseline;
+
+    opacity: .6;
+    cursor: pointer;
+  }
+
+  &__input {
+    @extend %block-v-h-100;
+
+    position: relative;
+
+    margin: 0;
+    padding: 0;
+
+    cursor: pointer;
+  }
+}
