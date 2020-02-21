@@ -39,7 +39,7 @@ const Weather = () => {
               Friday
             </h4>
             <SettingsDropdown
-              containerClassName="weather__settings"
+              className="weather__settings"
               dropdownClassName="weather__settings-window"
             >
               <button

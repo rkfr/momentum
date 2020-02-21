@@ -1,0 +1,87 @@
+@import '../../styles/utils.scss';
+
+.links-list {
+  min-width: 200px;
+
+  &__link-wrapper {
+    @extend %flex-start-center;
+  }
+
+  
+}
+
+.link {
+  @extend %flex-start-center;
+  flex-grow: 1;
+
+  padding: 5px 0;
+  padding-right: 2rem;
+  color: $text-color-primary;
+  opacity: .8;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &__img-btn {
+    display: block;
+    width: 18px;
+    height: 18px;
+    opacity: .6;
+  }
+
+  &__text {
+    margin-left: .6rem;
+  }
+
+  &__settings {
+    flex-grow: 0;
+    position: relative;
+  }
+
+  &__settings-drodown {
+    position: absolute;
+    right: 100%;
+    top: 15%;
+    z-index: 1;
+  }
+
+  &__btn {
+    color: $text-color-primary;
+    padding: 6px 21px 6px;
+    @include fontSize(14px);
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $bg-color-drop-hover;
+    }
+  }
+}
+
+.add-link {
+    display: block;
+    width: 100%;
+    padding-left: 5px;
+    
+    text-align: left;
+    opacity: .4;
+
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
+
+  &__plus {
+    color: $text-color-primary;
+    font-weight: 600;
+    @include fontSize(20px);
+  }
+
+  &__add-btn {
+    color: $text-color-primary;
+    padding: 0;
+    margin-left: .6rem;
+  }
+}

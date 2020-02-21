@@ -7,13 +7,6 @@
   right: 4%;
 
   display: inline-block;
-
-  &__toggle-button {
-    font-weight: 500;
-    color: $text-color-primary;
-
-    cursor: pointer;
-  }
 }
 
 .todo-dropdown.dropdown-window {

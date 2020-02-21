@@ -14,3 +14,9 @@
   left: 0;
   transform: translate(-50%, -50%);
 }
+
+%flex-start-center {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

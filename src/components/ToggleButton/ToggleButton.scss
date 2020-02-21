@@ -1,0 +1,14 @@
+@import '../../styles/utils.scss';
+
+.toggle-button {
+  @include fontSize(18px);
+  font-weight: 500;
+  color: $text-color-primary;
+  transition: opacity .2s ease-out;
+
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+  }
+}

@@ -57,7 +57,7 @@ const TodoList = () => (
               {text}
             </span>
             <SettingsDropdown
-              containerClassName="todo-list__item-settings"
+              className="todo-list__item-settings"
             >
               <div className="edit-buttons">
                 <button

@@ -1,0 +1,18 @@
+@import '../../styles/utils.scss';
+
+.links {
+  // to remove
+  position: absolute;
+  top: 5%;
+  left: 5%;
+
+  // position: relative;
+  display: inline-block;
+
+  &__dropdown {
+    position: absolute;
+    top: 50px;
+    left: -10px;
+  }
+
+}

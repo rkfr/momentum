@@ -4,6 +4,7 @@ import './TodoApp.scss';
 import DropdownWindow from '../DropdownWindow';
 import SettingsDropdown from '../SettingsDropdown';
 import TodoList from '../TodoList';
+import ToggleButton from '../ToggleButton';
 
 const Todo = () => {
   const [todoVisibility, setVisibility] = useState(false);
@@ -14,13 +15,9 @@ const Todo = () => {
 
   return (
     <div className="todo">
-      <button
-        type="button"
-        className="todo__toggle-button"
-        onClick={toggleVisibility}
-      >
+      <ToggleButton onClick={toggleVisibility}>
         Todo
-      </button>
+      </ToggleButton>
 
       <DropdownWindow
         arrow="bottom-right"

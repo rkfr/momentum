@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 const SettingsDropdown = ({
   children,
-  containerClassName,
+  className,
   buttonClassName,
   dropdownClassName,
 }) => {
@@ -15,7 +15,7 @@ const SettingsDropdown = ({
     setVisibility((prevVisibility) => !prevVisibility);
   };
 
-  const rootClass = classNames([containerClassName], {
+  const rootClass = classNames([className], {
     'settings-dropdown': true,
   });
 
@@ -50,13 +50,13 @@ const SettingsDropdown = ({
 
 SettingsDropdown.propTypes = {
   children: PropTypes.node.isRequired,
-  containerClassName: PropTypes.string,
+  className: PropTypes.string,
   dropdownClassName: PropTypes.string,
   buttonClassName: PropTypes.string,
 };
 
 SettingsDropdown.defaultProps = {
-  containerClassName: '',
+  className: '',
   dropdownClassName: '',
   buttonClassName: '',
 };

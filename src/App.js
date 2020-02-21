@@ -1,9 +1,16 @@
 import React from 'react';
 import './App.scss';
 
+import Weather from './components/Weather';
+import TodoApp from './components/TodoApp';
+import Links from './components/Links';
+
 const App = () => (
   <div className="App">
-    <h1>Momentum App</h1>
+
+    <Links />
+    <Weather />
+    <TodoApp />
   </div>
 );
 

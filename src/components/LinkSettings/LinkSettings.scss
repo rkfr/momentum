@@ -1,0 +1,86 @@
+@import '../../styles/utils.scss';
+
+.edit-link {
+  &__top {
+    margin-bottom: .8rem;
+  }
+
+  &__back-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+
+    width: 25px;
+    height: 25px;
+
+    opacity: .7;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .9;
+      background-color: $bg-color-drop-hover;
+    }
+  }
+
+  &__btn-img {
+    display: block;
+    position: relative;
+    z-index: 0;
+
+    height: 14px;
+    width: 14px;
+  }
+
+  &__form {
+    display: block;
+    min-width: 200px;
+    margin-bottom: 1.2rem;
+  }
+
+  &__label {
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: .7;
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    padding: 6px 1px;
+
+    color: $text-color-primary;
+    @include fontSize(17px);
+
+    border-bottom: 2px solid rgba(255, 255, 255, .4);
+    transition: border .1s ease;
+
+    &:hover {
+      border-bottom-color: rgba(255, 255, 255, .6);
+    }
+
+    &:focus {
+      border-bottom-color: rgba(255, 255, 255, .9);
+    }
+  }
+
+  &__btn-save {
+    margin: 0;
+    padding: 7px 30px 8px;
+    background: rgba(255,255,255,.3);
+    
+    color: $text-color-primary;
+    border: none;
+    border-radius: 50px;
+
+    @include fontSize(14px);
+    transition: all .1s ease;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255,255,255,.4);
+    }
+  }
+}
