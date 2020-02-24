@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './TodoApp.scss';
+import './Todo.scss';
 
-import DropdownWindow from '../DropdownWindow';
-import SettingsDropdown from '../SettingsDropdown';
+import DropdownWindow from '../../DropdownWindow';
+import SettingsDropdown from '../../SettingsDropdown';
 import TodoList from '../TodoList';
-import ToggleButton from '../ToggleButton';
+import ToggleButton from '../../ToggleButton';
 
 const Todo = () => {
   const [todoVisibility, setVisibility] = useState(false);

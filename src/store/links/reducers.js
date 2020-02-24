@@ -1,61 +1,73 @@
 import { ACTION_TYPES } from './actions';
 
 const initialState = {
-  name: '',
-  url: '',
-  list: [],
-  isEditable: false,
+  isCreating: false,
+  isEditing: false,
+  items: [],
+  editingId: null,
 };
 
 const links = (state = initialState, action) => {
   switch (action.type) {
-    case ACTION_TYPES.SET_EDITABLE: {
+    // creating
+    case ACTION_TYPES.START_CREATING: {
       return {
         ...state,
-        isEditable: true,
+        isEditing: false,
+        isCreating: true,
       };
     }
 
-    case ACTION_TYPES.SET_NEW_ITEM_NAME: {
+    case ACTION_TYPES.FINISH_CREATING: {
+      return { ...state, isCreating: false };
+    }
+
+    case ACTION_TYPES.CREATE_ITEM: {
       return {
         ...state,
-        name: action.payload,
+        items: [...state.items, action.payload],
       };
     }
 
-    case ACTION_TYPES.SET_NEW_ITEM_URL: {
+    // editing
+    case ACTION_TYPES.START_EDITING: {
       return {
         ...state,
-        url: action.payload,
+        isCreating: false,
+        isEditing: true,
       };
     }
 
-    case ACTION_TYPES.CLOSE_EDITING: {
+    case ACTION_TYPES.FINISH_EDITING: {
+      return { ...state, isEditing: false };
+    }
+
+    case ACTION_TYPES.SET_EDITING_ID: {
+      return { ...state, editingId: action.payload };
+    }
+
+    case ACTION_TYPES.SAVE_EDITED_ITEM: {
+      const { editingId, items } = state;
+      const { payload } = action;
+
       return {
         ...state,
-        isEditable: false,
+        editingId: null,
+        items: items.map((item) => ((item.id === editingId) ? {
+          ...item,
+          name: payload.name,
+          url: payload.url,
+        } : item)),
       };
     }
 
-    case ACTION_TYPES.ADD_ITEM: {
-      const {
-        name,
-        url,
-      } = state;
-
-      const item = {
-        id: `#${name}#${Date.now()}`,
-        name,
-        link: `https://${url}/`,
-        edited: false,
-      };
+    case ACTION_TYPES.DELETE_ITEM: {
+      const { items } = state;
+      const { payload: itemId } = action;
 
       return {
         ...state,
-        list: [
-          ...state.list,
-          item,
-        ],
+        items: items.filter(({ id }) => id !== itemId),
       };
     }
 

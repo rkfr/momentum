@@ -1,9 +1,13 @@
 import { connect } from 'react-redux';
 import Links from './Links';
-import { getIsEditable } from '../../store/links';
+import {
+  getCreatingState,
+  getEditingState,
+} from '../../../store/links';
 
 const mapStateToProps = (state) => ({
-  isEditable: getIsEditable(state),
+  isCreating: getCreatingState(state),
+  isEditing: getEditingState(state),
 });
 
 export default connect(mapStateToProps)(Links);

@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import './Weather.scss';
 
-import DropdownWindow from '../DropdownWindow';
-import SettingsDropdown from '../SettingsDropdown';
+import DropdownWindow from '../../DropdownWindow';
+import SettingsDropdown from '../../SettingsDropdown';
 import Forecast from '../Forecast';
 
 const Weather = () => {

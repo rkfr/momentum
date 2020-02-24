@@ -2,7 +2,7 @@
 import React from 'react';
 import './TodoList.scss';
 
-import SettingsDropdown from '../SettingsDropdown';
+import SettingsDropdown from '../../SettingsDropdown';
 
 const items = [
   {

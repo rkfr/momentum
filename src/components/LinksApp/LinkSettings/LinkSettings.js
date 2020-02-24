@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './LinkSettings.scss';
+
+const newLink = (name, url) => ({
+  name,
+  url,
+  id: `#${Date.now()}:${name}`,
+});
 
 const LinkSettings = (props) => {
   const {
     buttonText,
-    name,
-    link,
     onBack,
-    onNameChange,
-    onLinkChange,
     onApply,
   } = props;
+
+  const [name, setName] = useState('');
+  const onNameChange = ({ target: { value } }) => {
+    setName(value);
+  };
+
+  const [url, setUrl] = useState('');
+  const onLinkChange = ({ target: { value } }) => {
+    setUrl(value);
+  };
 
   return (
     <div className="edit-link">
@@ -46,7 +58,7 @@ const LinkSettings = (props) => {
         <input
           type="text"
           placeholder="example.com"
-          value={link}
+          value={url}
           onChange={onLinkChange}
           className="edit-link__input"
         />
@@ -55,7 +67,7 @@ const LinkSettings = (props) => {
       <button
         type="button"
         className="edit-link__btn-save"
-        onClick={onApply}
+        onClick={onApply(newLink(name, url))}
       >
         {buttonText}
       </button>
@@ -66,21 +78,13 @@ const LinkSettings = (props) => {
 
 LinkSettings.propTypes = {
   buttonText: PropTypes.string,
-  name: PropTypes.string,
-  link: PropTypes.string,
   onBack: PropTypes.func,
-  onNameChange: PropTypes.func,
-  onLinkChange: PropTypes.func,
   onApply: PropTypes.func,
 };
 
 LinkSettings.defaultProps = {
   buttonText: '',
-  name: '',
-  link: '',
   onBack: () => {},
-  onNameChange: () => {},
-  onLinkChange: () => {},
   onApply: () => {},
 };
 

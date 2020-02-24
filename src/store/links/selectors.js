@@ -1,7 +1,5 @@
-export const getIsEditable = (state) => state.links.isEditable;
+export const getCreatingState = (state) => state.links.isCreating;
 
-export const getList = (state) => state.links.list;
+export const getEditingState = (state) => state.links.isEditing;
 
-export const getNewItemName = (state) => state.links.name;
-
-export const getNewItemUrl = (state) => state.links.url;
+export const getLinksItems = (state) => state.links.items;
