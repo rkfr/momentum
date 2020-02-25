@@ -2,70 +2,94 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './LinksList.scss';
 import SettingsDropdown from '../../SettingsDropdown';
+import LinkSettings from '../LinkSettings';
 
 const LinksList = ({
   links,
-  startCreating,
+  createNewLink,
+  cancelEditing,
+  saveModifiedList,
   startEditing,
-  deleteItem,
-}) => (
-  <>
-    <ul className="links-list">
-      {links.map(({ id, name, link }) => (
-        <li key={id} className="links-list__link-wrapper">
-          <a href={link} className="link">
+  deleteLink,
+}) => {
+  const editingLink = links.find(({ editing }) => editing);
 
-            <input
-              className="link__img-btn"
-              type="image"
-              src="./images/right-arrow.svg"
-              alt="search"
-            />
-            <span className="link__text">{name}</span>
+  if (editingLink) {
+    const { name, url, id } = editingLink;
 
-          </a>
-          <SettingsDropdown
-            className="link__settings"
-            dropdownClassName="link__settings-drodown"
-          >
-            <button
-              type="button"
-              className="link__btn"
-              onClick={startEditing(id)}
+    return (
+      <LinkSettings
+        buttonText="Save"
+        prevName={name}
+        prevUrl={url}
+        onBack={cancelEditing}
+        onSave={saveModifiedList(id)}
+      />
+    );
+  }
+
+  return (
+    <>
+      <div className="links-list">
+        {links.map(({ id, name, url }) => (
+
+          <div key={id} className="links-list__link-wrapper">
+            <a href={url} className="link">
+
+              <input
+                className="link__img-btn"
+                type="image"
+                src="./images/right-arrow.svg"
+                alt="search"
+              />
+              <span className="link__text">{name}</span>
+
+            </a>
+            <SettingsDropdown
+              className="link__settings"
+              dropdownClassName="link__settings-drodown"
             >
-              Modify
-            </button>
-            <button
-              type="button"
-              className="link__btn"
-              onClick={deleteItem(id)}
-            >
-              Delete
-            </button>
-          </SettingsDropdown>
-        </li>
-      ))}
-    </ul>
-    <button
-      type="button"
-      className="add-link"
-      onClick={startCreating}
-    >
-      <span className="add-link__plus">+</span>
-      <span
+              <button
+                type="button"
+                className="link__btn"
+                onClick={startEditing(id)}
+              >
+                Modify
+              </button>
+              <button
+                type="button"
+                className="link__btn"
+                onClick={deleteLink(id)}
+              >
+                Delete
+              </button>
+            </SettingsDropdown>
+          </div>
+        ))}
+      </div>
+      {!editingLink && (
+        <button
+          type="button"
+          className="add-link"
+          onClick={createNewLink}
+        >
+          <span className="add-link__plus">+</span>
+          <span className="add-link__add-btn">
+            New Link
+          </span>
+        </button>
+      )}
 
-        className="add-link__add-btn"
-      >
-        New Link
-      </span>
-    </button>
-  </>
-);
+    </>
+  );
+};
 
 LinksList.propTypes = {
-  startCreating: PropTypes.func.isRequired,
+  createNewLink: PropTypes.func.isRequired,
   startEditing: PropTypes.func.isRequired,
-  deleteItem: PropTypes.func.isRequired,
+  deleteLink: PropTypes.func.isRequired,
+  cancelEditing: PropTypes.func.isRequired,
+  saveModifiedList: PropTypes.func.isRequired,
   links: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

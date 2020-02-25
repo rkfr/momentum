@@ -4,14 +4,22 @@ import './Links.scss';
 import ToggleButton from '../../ToggleButton';
 import DropdownWindow from '../../DropdownWindow';
 import LinksList from '../LinksList';
-import LinkSettingsWithCreation from '../LinkSettingsWithCreation';
-import LinkSettingsWithEditing from '../LinkSettingsWithEditing';
+import LinkSettings from '../LinkSettings';
 
-const Links = ({ isCreating, isEditing }) => {
+const Links = ({ addLink }) => {
   const [isVisible, setVisibility] = useState(false);
-
   const toggleVisibility = () => {
     setVisibility((prevVisibility) => !prevVisibility);
+  };
+
+  const [isCreatingWindowVisible, setCreatingVisibility] = useState(false);
+  const showCreating = () => setCreatingVisibility(true);
+  const hideCreating = () => setCreatingVisibility(false);
+
+
+  const createNewLink = ({ name, url }) => () => {
+    addLink({ name, url });
+    hideCreating();
   };
 
   return (
@@ -29,12 +37,17 @@ const Links = ({ isCreating, isEditing }) => {
           isActive={isVisible}
           className="links__dropdown"
         >
-            {
-              // eslint-disable-next-line no-nested-ternary
-              isCreating ? <LinkSettingsWithCreation />
-                : isEditing ? <LinkSettingsWithEditing />
-                  : <LinksList />
-            }
+            {isCreatingWindowVisible ? (
+              <LinkSettings
+                buttonText="Create"
+                onSave={createNewLink}
+                onBack={hideCreating}
+              />
+            ) : (
+              <LinksList
+                createNewLink={showCreating}
+              />
+            )}
 
         </DropdownWindow>
       )}
@@ -44,13 +57,7 @@ const Links = ({ isCreating, isEditing }) => {
 };
 
 Links.propTypes = {
-  isCreating: PropTypes.bool,
-  isEditing: PropTypes.bool,
-};
-
-Links.defaultProps = {
-  isCreating: false,
-  isEditing: false,
+  addLink: PropTypes.func.isRequired,
 };
 
 export default Links;

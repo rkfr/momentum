@@ -1,13 +1,19 @@
+
 import { connect } from 'react-redux';
 import Links from './Links';
-import {
-  getCreatingState,
-  getEditingState,
-} from '../../../store/links';
+import { addNewLink } from '../../../store/linksApp';
 
-const mapStateToProps = (state) => ({
-  isCreating: getCreatingState(state),
-  isEditing: getEditingState(state),
+const mapDispatchToProps = (dispatch) => ({
+  addLink: (linkData) => {
+    const { name, url } = linkData;
+
+    dispatch(addNewLink({
+      name,
+      url: `https://${url}`,
+      id: `#${Date.now()}.${name}`,
+      editing: false,
+    }));
+  },
 });
 
-export default connect(mapStateToProps)(Links);
+export default connect(null, mapDispatchToProps)(Links);

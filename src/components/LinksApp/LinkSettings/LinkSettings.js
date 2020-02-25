@@ -1,32 +1,35 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './LinkSettings.scss';
-
-const newLink = (name, url) => ({
-  name,
-  url,
-  id: `#${Date.now()}:${name}`,
-});
+import classNames from 'classnames';
 
 const LinkSettings = (props) => {
   const {
+    className,
     buttonText,
+    prevName,
+    prevUrl,
     onBack,
-    onApply,
+    onSave,
   } = props;
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState(prevName);
+  const [url, setUrl] = useState(prevUrl);
+
   const onNameChange = ({ target: { value } }) => {
     setName(value);
   };
 
-  const [url, setUrl] = useState('');
   const onLinkChange = ({ target: { value } }) => {
     setUrl(value);
   };
 
+  const rootClass = classNames([className], {
+    'edit-link': true,
+  });
+
   return (
-    <div className="edit-link">
+    <div className={rootClass}>
       <div className="edit-link__top">
         <button
           className="edit-link__back-btn"
@@ -67,7 +70,7 @@ const LinkSettings = (props) => {
       <button
         type="button"
         className="edit-link__btn-save"
-        onClick={onApply(newLink(name, url))}
+        onClick={onSave({ name, url })}
       >
         {buttonText}
       </button>
@@ -77,15 +80,18 @@ const LinkSettings = (props) => {
 };
 
 LinkSettings.propTypes = {
-  buttonText: PropTypes.string,
-  onBack: PropTypes.func,
-  onApply: PropTypes.func,
+  buttonText: PropTypes.string.isRequired,
+  onBack: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  prevName: PropTypes.string,
+  prevUrl: PropTypes.string,
+  className: PropTypes.string,
 };
 
 LinkSettings.defaultProps = {
-  buttonText: '',
-  onBack: () => {},
-  onApply: () => {},
+  prevName: '',
+  prevUrl: '',
+  className: '',
 };
 
 export default LinkSettings;

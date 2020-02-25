@@ -1,24 +1,24 @@
 import { connect } from 'react-redux';
 import LinksList from './LinksList';
 import {
-  getLinksItems,
-  startCreating,
+  getLinks,
   startEditing,
-  setEditingId,
-  deleteItem,
-} from '../../../store/links';
+  deleteLink,
+  setAllEditingToFalse,
+  saveModifiedList,
+} from '../../../store/linksApp';
 
 const mapStateToProps = (state) => ({
-  links: getLinksItems(state),
+  links: getLinks(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  startCreating: () => dispatch(startCreating()),
-  startEditing: (id) => () => {
-    dispatch(setEditingId(id));
-    dispatch(startEditing());
+  startEditing: (id) => () => dispatch(startEditing(id)),
+  deleteLink: (id) => () => dispatch(deleteLink(id)),
+  cancelEditing: () => dispatch(setAllEditingToFalse()),
+  saveModifiedList: (id) => ({ name, url }) => () => {
+    dispatch(saveModifiedList({ id, name, url }));
   },
-  deleteItem: (id) => () => dispatch(deleteItem(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LinksList);
