@@ -1,12 +1,13 @@
 import { createStore, combineReducers } from 'redux';
-import links from './links';
+import { linksApp } from './linksApp';
 
-const store = createStore(combineReducers({
-  links,
-}));
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
+const rootReducer = combineReducers({ linksApp });
+
+const store = createStore(rootReducer);
 
 export default store;
+
+// store.subscribe(() => {
+//   console.log(store.getState());
+// });
