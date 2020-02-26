@@ -1,34 +1,18 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './TodoList.scss';
 
 import SettingsDropdown from '../../SettingsDropdown';
 
-const items = [
-  {
-    id: 0,
-    edited: true,
-    completed: false,
-    text: 'first task',
-  },
-  {
-    id: 1,
-    edited: false,
-    completed: true,
-    text: 'second task',
-  },
-  {
-    id: 2,
-    edited: false,
-    completed: false,
-    text: 'third task',
-  },
-];
-
-const TodoList = () => (
+const TodoList = ({
+  items,
+  deleteItem,
+  toggleCompleted,
+}) => (
   <ul className="todo-list">
     {items.map(({
-      id, text, completed, edited,
+      id, text, completed, editing,
     }) => (
       <li
         className="todo-list__item"
@@ -39,14 +23,13 @@ const TodoList = () => (
           type="checkbox"
           className="todo-list__checkbox"
           checked={completed}
-          defaultChecked
+          onChange={toggleCompleted(id)}
         />
-        {edited ? (
+        {editing ? (
           <input
             type="text"
             value="text"
             className="todo-list__edit-input"
-            onChange={() => {}}
             autoFocus
           />
         ) : (
@@ -69,6 +52,7 @@ const TodoList = () => (
                 <button
                   type="button"
                   className="edit-buttons__button"
+                  onClick={deleteItem(id)}
                 >
                   Delete
                 </button>
@@ -81,5 +65,20 @@ const TodoList = () => (
     ))}
   </ul>
 );
+
+TodoList.propTypes = {
+  deleteItem: PropTypes.func.isRequired,
+  toggleCompleted: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    text: PropTypes.string,
+    completed: PropTypes.bool,
+    editing: PropTypes.editing,
+  })),
+};
+
+TodoList.defaultProps = {
+  items: [],
+};
 
 export default TodoList;

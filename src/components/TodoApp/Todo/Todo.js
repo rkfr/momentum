@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './Todo.scss';
 
 import DropdownWindow from '../../DropdownWindow';
@@ -6,12 +7,39 @@ import SettingsDropdown from '../../SettingsDropdown';
 import TodoList from '../TodoList';
 import ToggleButton from '../../ToggleButton';
 
-const Todo = () => {
+const Todo = ({
+  addTodo,
+  clearList,
+  showList,
+}) => {
   const [todoVisibility, setVisibility] = useState(false);
 
   const toggleVisibility = () => (
     setVisibility((prevVisibility) => !prevVisibility)
   );
+
+  const [todosVisibility, setTodosVisibility] = useState(showList);
+  const showTodos = () => {
+    setTodosVisibility(true);
+  };
+
+  useEffect(() => {
+    if (!showList) {
+      setTodosVisibility(false);
+    }
+  }, [showList]);
+
+  const [todoText, setTodoText] = useState('');
+  const onTextChange = ({ target: { value } }) => {
+    setTodoText(value);
+  };
+
+  const onAddTodo = (e) => {
+    e.preventDefault();
+
+    addTodo(todoText);
+    setTodoText('');
+  };
 
   return (
     <div className="todo">
@@ -31,33 +59,55 @@ const Todo = () => {
               <button
                 type="button"
                 className="todo-app__clear-button"
+                onClick={clearList}
               >
                 Clear
               </button>
             </SettingsDropdown>
           </header>
-          {/* <main className="todo-app__main">
-            <h2 className="todo-app__title-empty">
-              Add a todo to get started
-            </h2>
-            <button type="button" className="todo-app__button-empty">
-              New Todo
-            </button>
-          </main> */}
-          <TodoList />
+
+          {!todosVisibility ? (
+            <main className="todo-app__main">
+              <h2 className="todo-app__title-empty">
+                Add a todo to get started
+              </h2>
+              <button
+                type="button"
+                className="todo-app__button-empty"
+                onClick={showTodos}
+              >
+                New Todo
+              </button>
+            </main>
+          ) : (
+            <TodoList />
+          )}
 
           <footer className="todo-app__footer">
-            <input
-              className="todo-app__input-empty"
-              type="text"
-              placeholder="New Todo"
-              onChange={() => {}}
-            />
+            {todosVisibility && (
+
+            <form onSubmit={onAddTodo}>
+              <input
+                className="todo-app__input-empty"
+                type="text"
+                value={todoText}
+                placeholder="New Todo"
+                onChange={onTextChange}
+              />
+            </form>
+            )}
           </footer>
+
         </div>
       </DropdownWindow>
     </div>
   );
+};
+
+Todo.propTypes = {
+  addTodo: PropTypes.func.isRequired,
+  clearList: PropTypes.func.isRequired,
+  showList: PropTypes.bool.isRequired,
 };
 
 export default Todo;
