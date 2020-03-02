@@ -33,6 +33,8 @@
 
   top: 100%;
   right: 0;
+  width: 465px;
+  height: 251px;
 }
 
 .weather {
@@ -43,6 +45,13 @@
 
   display: inline-block;
   // position: relative;
+
+  &__dropdown-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   &__overview {
     text-align: left;
@@ -98,6 +107,10 @@
 
     opacity: .7;
     margin-bottom: 1rem;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   &__degree {
@@ -122,8 +135,13 @@
   display: flex;
   width: 100%;
 
-  &__input {
+  &__form {
     flex-grow: 1;
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
 
     padding: 5px 0;
     padding-right: 30px;
@@ -135,13 +153,16 @@
   }
 
   &__cancel-btn {
-    position: absolute;
-    right: 6%;
-    top: 14%;
-
     display: block;
-    width: 15px;
-    height: 15px;
+    
+    position: absolute;
+    right: 20px;
+    top: 30px;
+
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+
     cursor: pointer;
   }
 }
