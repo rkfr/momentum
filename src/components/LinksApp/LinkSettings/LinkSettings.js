@@ -45,7 +45,7 @@ const LinkSettings = (props) => {
       </div>
 
 
-      <form className="edit-link__form">
+      <div className="edit-link__form">
         <label className="edit-link__label">Name</label>
         <input
           type="text"
@@ -54,9 +54,9 @@ const LinkSettings = (props) => {
           onChange={onNameChange}
           className="edit-link__input"
         />
-      </form>
+      </div>
 
-      <form className="edit-link__form">
+      <div className="edit-link__form">
         <label className="edit-link__label">Links</label>
         <input
           type="text"
@@ -65,7 +65,7 @@ const LinkSettings = (props) => {
           onChange={onLinkChange}
           className="edit-link__input"
         />
-      </form>
+      </div>
 
       <button
         type="button"
