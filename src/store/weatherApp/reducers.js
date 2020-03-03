@@ -30,6 +30,7 @@ export const weatherApp = (state = initialState, action) => {
         ...state,
         weather,
         location: weather.name,
+        error: false,
       };
     }
 
@@ -39,6 +40,14 @@ export const weatherApp = (state = initialState, action) => {
       return {
         ...state,
         location,
+        error: false,
+      };
+    }
+
+    case ACTION_TYPES.SET_LOADING_ERROR: {
+      return {
+        ...state,
+        error: true,
       };
     }
 

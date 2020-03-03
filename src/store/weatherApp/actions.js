@@ -2,6 +2,7 @@ import {
   getLocation,
   loadCurrentWeatherByCoords,
   loadCurrentWeather,
+  loadForecast,
 } from '../../api';
 
 export const ACTION_TYPES = {
@@ -9,6 +10,7 @@ export const ACTION_TYPES = {
   SET_LOCATION: 'SET_LOCATION',
   START_LOADING: 'START_LOADING',
   FINISH_LOADING: 'FINISH_LOADING',
+  SET_LOADING_ERROR: 'SET_LOADING_ERROR',
 };
 
 export const setCurrentWeather = (weather) => ({
@@ -29,20 +31,36 @@ export const finishLoading = () => ({
   type: ACTION_TYPES.FINISH_LOADING,
 });
 
+export const setLoadingError = () => ({
+  type: ACTION_TYPES.SET_LOADING_ERROR,
+});
 
 export const loadWeather = (location) => (dispatch) => {
   dispatch(startLoading());
 
   if (location) {
-    return loadCurrentWeather(location)
-      .then((weatherData) => {
+    return Promise.all([loadCurrentWeather(location), loadForecast(location)])
+      .then(([weatherData, forecastData]) => {
         dispatch(setCurrentWeather(weatherData));
         dispatch(finishLoading());
+
+        // console.log(weatherData, forecastData);
       })
       .catch(() => {
-        console.error('error: location not found');
         dispatch(finishLoading());
+        dispatch(setLoadingError());
       });
+
+
+    // return loadCurrentWeather(location)
+    //   .then((weatherData) => {
+    //     dispatch(setCurrentWeather(weatherData));
+    //     dispatch(finishLoading());
+    //   })
+    //   .catch(() => {
+    //     dispatch(finishLoading());
+    //     dispatch(setLoadingError());
+    //   });
   }
 
   return getLocation()
