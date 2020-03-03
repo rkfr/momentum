@@ -33,47 +33,7 @@ const formatWeatherResponse = (responseData) => {
   };
 };
 
-const formatForecastResponse = ({ list = [] }) => {
-  const getDate = (item) => item.dt_txt.split(' ')[0];
-
-  const sortedList = [];
-  let tmp = [];
-
-  list.forEach((item, i) => {
-    const date = getDate(item);
-    const nextDate = i ? getDate(list[i - 1]) : null;
-
-    if ((date !== nextDate) && (tmp.length !== 0)) {
-      sortedList.push(tmp);
-      tmp = [];
-    }
-
-    tmp.push(item);
-  });
-
-  const formattedList = sortedList.map((dayForecast) => {
-    const avgTemp = dayForecast.reduce((prevTemp, day) => {
-      const { main: { temp_min, temp_max } } = day;
-
-      return {
-        min: prevTemp.min + temp_min,
-        max: prevTemp.max + temp_max,
-      };
-    }, { min: 0, max: 0 });
-
-    const tempmin = avgTemp.min / dayForecast.length;
-    const tempMax = avgTemp.max / dayForecast.length;
-    console.log(dayForecast.length);
-
-
-    return {
-      tempmin,
-      tempMax,
-    };
-  });
-
-  console.log(formattedList);
-};
+const formatForecastResponse = ({ list = [] }) => {};
 
 export const getLocation = () => new Promise((resolve, reject) => {
   navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -94,9 +54,4 @@ export const loadCurrentWeatherByCoords = (lat, lon) => (
 
 export const loadForecast = (location = 'london') => fetch(`${BASE_URL}/forecast?q=${location}&appid=${API_KEY}`)
   .then((res) => res.json())
-  .then((data) => {
-    formatForecastResponse(data);
-
-
-    return data;
-  });
+  .then((data) => data);
