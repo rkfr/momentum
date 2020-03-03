@@ -6,12 +6,14 @@ import {
   setLocation,
   loadWeather,
   getLoadingStatus,
+  getErrorStatus,
 } from '../../../store/weatherApp';
 
 const mapStateToProps = (state) => ({
   weather: getCurrentWeather(state),
   location: getSelectedLocation(state),
   isLoading: getLoadingStatus(state),
+  isError: getErrorStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

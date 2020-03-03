@@ -150,6 +150,11 @@
     @include fontSize(22px);
 
     border-bottom: 1px solid $text-color-primary;
+
+    &--error {
+      color: #af4448;
+      border-bottom: 1px solid #ba000d;
+    }
   }
 
   &__cancel-btn {

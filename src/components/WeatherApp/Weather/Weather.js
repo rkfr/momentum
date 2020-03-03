@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './Weather.scss';
+import classNames from 'classnames';
 
 import Loader from '../../Loader';
 import DropdownWindow from '../../DropdownWindow';
@@ -15,6 +16,7 @@ const Weather = ({
   setLocation,
   loadWeather,
   isLoading,
+  isError,
 }) => {
   const [weatherVisibility, setVisibility] = useState(false);
 
@@ -42,6 +44,10 @@ const Weather = ({
     e.preventDefault();
     toggleEditing(false);
   };
+
+  const changeLocationInputClass = classNames('change-location__input', {
+    'change-location__input--error': isError,
+  });
 
   return (
     <div className="weather">
@@ -97,7 +103,7 @@ const Weather = ({
                           value={location}
                           placeholder="Location"
                           type="text"
-                          className="change-location__input"
+                          className={changeLocationInputClass}
                           onChange={setLocation}
                         />
                       </form>
@@ -135,6 +141,7 @@ Weather.propTypes = {
   setLocation: PropTypes.func.isRequired,
   loadWeather: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  isError: PropTypes.bool,
   weather: PropTypes.shape({
     name: PropTypes.string,
     country: PropTypes.string,
@@ -148,6 +155,7 @@ Weather.propTypes = {
 Weather.defaultProps = {
   weather: {},
   location: '',
+  isError: false,
 };
 
 export default Weather;
