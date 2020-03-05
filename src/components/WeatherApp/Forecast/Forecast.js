@@ -1,37 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Forecast.scss';
 
-const weather = [
-  {
-    day: 'wed',
-    min: '9',
-    max: '4',
-  },
-  {
-    day: 'thu',
-    min: '7',
-    max: '3',
-  },
-  {
-    day: 'fri',
-    min: '6',
-    max: '2',
-  },
-  {
-    day: 'sat',
-    min: '4',
-    max: '1',
-  },
-  {
-    day: 'sun',
-    min: '8',
-    max: '3',
-  },
-];
-
-const Forecast = () => (
+const Forecast = ({ forecast }) => (
   <ul className="forecast">
-    {weather.map(({ day, min, max }) => (
+    {forecast.map(({ day, min, max }) => (
       <li className="forecast__item" key={day}>
         <div className="forecast__day">{day}</div>
         <div className="forecast__temp-wrapper">
@@ -42,5 +15,17 @@ const Forecast = () => (
     ))}
   </ul>
 );
+
+Forecast.propTypes = {
+  forecast: PropTypes.arrayOf(PropTypes.shape({
+    day: PropTypes.string,
+    min: PropTypes.number,
+    max: PropTypes.number,
+  })),
+};
+
+Forecast.defaultProps = {
+  forecast: [],
+};
 
 export default Forecast;

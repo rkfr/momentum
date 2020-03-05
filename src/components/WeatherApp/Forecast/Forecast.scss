@@ -4,9 +4,10 @@
   display: flex;
   width: 100%;
   padding-top: .5rem;
+  justify-content: space-between;
 
   &__item {
-    padding: 5px 24px;
+    padding: 5px 15px;
     border-radius: 3px;
 
     cursor: pointer;
