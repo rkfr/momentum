@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const API_KEY = '158d21ae5337a203dfccb519d821591d';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
@@ -11,7 +12,13 @@ const days = [
   'Saturday',
 ];
 
-const kelvinToCelsius = (k) => (k ? Math.ceil(k - 273.15) : 0);
+export const getDateFromUnixMs = (ms) => {
+  const date = String(new Date(ms * 1000)).split(' ');
+  const [dayOfWeek] = date;
+  return dayOfWeek;
+};
+
+export const kelvinToCelsius = (k) => (k ? (k - 273.15) : 0);
 
 const getCurrentDayName = () => days[new Date().getDay()];
 
@@ -28,12 +35,19 @@ const formatWeatherResponse = (responseData) => {
     name,
     country,
     description,
-    temp: kelvinToCelsius(temp),
+    temp: Math.ceil(kelvinToCelsius(temp)),
     day: getCurrentDayName(),
   };
 };
 
-const formatForecastResponse = ({ list = [] }) => {};
+const formatForecastResponse = ({ list = [] }) => list.map(({
+  dt, dt_txt, main: { temp_min, temp_max },
+}) => ({
+  dt,
+  date: dt_txt.split(' ')[0],
+  tempMin: kelvinToCelsius(temp_min),
+  tempMax: kelvinToCelsius(temp_max),
+}));
 
 export const getLocation = () => new Promise((resolve, reject) => {
   navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -54,4 +68,10 @@ export const loadCurrentWeatherByCoords = (lat, lon) => (
 
 export const loadForecast = (location = 'london') => fetch(`${BASE_URL}/forecast?q=${location}&appid=${API_KEY}`)
   .then((res) => res.json())
-  .then((data) => data);
+  .then((data) => formatForecastResponse(data));
+
+export const loadForecastByCoords = (lat, lon) => (
+  fetch(`${URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+    .then((res) => res.json())
+    .then((data) => formatForecastResponse(data))
+);

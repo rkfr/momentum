@@ -5,6 +5,7 @@ const initialState = {
   weather: {},
   location: null,
   error: null,
+  forecast: [],
 };
 
 export const weatherApp = (state = initialState, action) => {
@@ -48,6 +49,15 @@ export const weatherApp = (state = initialState, action) => {
       return {
         ...state,
         error: true,
+      };
+    }
+
+    case ACTION_TYPES.SET_FORECAST: {
+      const { payload: forecast } = action;
+
+      return {
+        ...state,
+        forecast,
       };
     }
 
