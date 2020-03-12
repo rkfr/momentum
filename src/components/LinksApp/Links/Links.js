@@ -5,6 +5,7 @@ import ToggleButton from '../../ToggleButton';
 import DropdownWindow from '../../DropdownWindow';
 import LinksList from '../LinksList';
 import LinkSettings from '../LinkSettings';
+import Search from '../Search';
 
 const Links = ({ addLink }) => {
   const [isVisible, setVisibility] = useState(false);
@@ -29,6 +30,7 @@ const Links = ({ addLink }) => {
         <ToggleButton onClick={toggleVisibility}>
           Links
         </ToggleButton>
+        <Search />
       </div>
 
       {isVisible && (
