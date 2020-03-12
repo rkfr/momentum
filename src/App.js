@@ -1,16 +1,19 @@
 import React from 'react';
 import './App.scss';
 
-import Weather from './components/WeatherApp';
-import TodoApp from './components/TodoApp';
-import Links from './components/LinksApp';
+// import Weather from './components/WeatherApp';
+// import TodoApp from './components/TodoApp';
+// import Links from './components/LinksApp';
+import Clock from './components/Clock';
 
 const App = () => (
   <div className="App">
 
-    <Links />
-    <Weather />
-    <TodoApp />
+    <Clock />
+
+    {/* <Links /> */}
+    {/* <Weather /> */}
+    {/* <TodoApp /> */}
   </div>
 );
 

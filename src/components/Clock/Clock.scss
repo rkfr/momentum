@@ -1,0 +1,15 @@
+@import '../../styles/utils.scss';
+
+.clock {
+  // remove
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__time {
+    @include fontSize(132px);
+    font-weight: 600;
+    color: $text-color-primary;
+  }
+}
