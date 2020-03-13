@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const FormattedDate = ({ date, className }) => {
-  const dateToShow = date.toLocaleTimeString().split(' ')[0];
+  const time = date.toLocaleTimeString().split(' ')[0];
+  const [hh, mm] = time.split(':');
+  const dateToShow = `${hh}:${mm}`;
 
   const rootClass = classNames('', {
     [className]: !!className,

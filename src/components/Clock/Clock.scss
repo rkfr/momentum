@@ -11,5 +11,6 @@
     @include fontSize(132px);
     font-weight: 600;
     color: $text-color-primary;
+    cursor: default;
   }
 }
