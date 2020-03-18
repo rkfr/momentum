@@ -1,0 +1,131 @@
+@import '../../styles/utils.scss';
+
+.focus {
+  color: #fff;
+  text-align: center;
+}
+
+.get-focus {
+  &__title {
+    @include fontSize(36px);
+    font-weight: 300;
+  }
+
+  &__form {
+    @extend %d-block-100;
+  }
+
+  &__input {
+    @include fontSize(36px);
+    @extend %d-block-100;
+
+    padding-top: 4px;
+    margin-bottom: 1rem;
+
+    text-align: center;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+  }
+
+  &__label {
+    @include fontSize(17px);
+    @extend %d-block-100;
+  }
+}
+
+.today {
+  position: relative;
+
+  &__controls {
+    @extend %flex-center;
+
+    &:hover .today__close {
+      visibility: visible;
+    }
+
+    &:hover .today__label::before {
+      visibility: visible;
+    }
+  }
+
+  &__title {
+    @include fontSize(22px);
+    text-transform: uppercase;
+    font-weight: 600;
+
+    padding-top: 1rem;
+  }
+
+  &__checkbox {
+    position: relative;
+    left: -21px;
+    opacity: 0;
+  }
+
+  &__label {
+    @include fontSize(34px);
+    position: relative;
+    padding-left: 4px;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      visibility: hidden;
+
+      position: absolute;
+      left: -35px;
+      top: 0;
+      transform: translateY(19px);
+
+      display: block;
+      width: 19px;
+      height: 19px;
+
+      border: 2px solid #fff;
+      border-radius: 3px;
+    }
+
+    &--checked {
+      opacity: .8;
+      text-decoration: line-through;
+
+      &::before {
+        background: url(/images/check-solid.svg) center center no-repeat;
+        background-size: 91%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__close {
+    @extend %flex-center;
+    visibility: hidden;
+
+    margin-left: 14px;
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+    transform: translateY(2px);
+    transition: .1s ease;
+
+    cursor: pointer;
+
+    &:hover {
+      background: $bg-color-drop-hover;
+    }
+  }
+
+  &__close-img {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.compliment {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
