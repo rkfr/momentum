@@ -16,6 +16,8 @@ const Name = ({ isLogged, setLogin }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    if (!name) return;
+
     setLogin();
   };
 
@@ -29,6 +31,7 @@ const Name = ({ isLogged, setLogin }) => {
 
   const toggleNameEditing = () => {
     setNameEditing((prevState) => !prevState);
+    setSettingsVisibility(false);
   };
 
   return (

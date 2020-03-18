@@ -1,12 +1,6 @@
 @import '../../styles/utils.scss';
 
 .name {
-  // remove
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
   &:hover .name__settings {
     opacity: 1;
   }
